@@ -1,0 +1,13 @@
+language: node_js
+node_js:
+  - "node"
+  - "8"
+  - "7"
+  - "6"
+  - "5"
+install:
+  - npm install
+script:
+  - npm run test:travis
+after_success:
+  - npm run coveralls
