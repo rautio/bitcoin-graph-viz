@@ -7,8 +7,9 @@ var env = require('yargs').argv.env;
 
 //Change this to your library name
 //Also remember to change the 'main' entry point in package.json
-var outputName = 'btc-graph-viz.js';
-var plugins = [], outputFile;
+var outputName = 'btc-graph-viz';
+var outputFile = outputName + '.js';
+var plugins = [];
 
 //For build mode we output a minified file. This is what will be published to npm.
 //Otherwise we can use the unminified version for development and debugging.
