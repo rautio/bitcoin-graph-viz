@@ -19,10 +19,16 @@ if(env === 'build'){
   // But I'm keeping both versions as .js for now for ease of development
 }
 
+//For using fetch
+plugins.push(new webpack.ProvidePlugin({
+    'Promise': 'es6-promise', // (https://gist.github.com/Couto/b29676dd1ab8714a818f#gistcomment-1584602)
+    'fetch': 'imports?this=>global!exports?global.fetch!whatwg-fetch'
+}));
+
 //The default entry point is src/index.js
 //The default output is build/btc-graph-viz.min.js or .js
 var config = {
-  entry: __dirname + '/src/index.js',
+  entry: ['whatwg-fetch', __dirname + '/src/index.js'],
   devtool: 'source-map',
   plugins: plugins,
   target: 'node',
