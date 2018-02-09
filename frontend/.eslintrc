@@ -17,8 +17,8 @@
     "expect": true,
   },
   "env":{
-    "browser":false,
-    "node":true,
+    "browser":true,
+    "node":false,
     "mocha":true,
     "es6":true
   },

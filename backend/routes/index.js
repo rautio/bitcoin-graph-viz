@@ -1,9 +1,11 @@
 import express from 'express';
 
+import BlockchainController from '../api/controllers/blockchainController';
+
+const bcCtrl = new BlockchainController();
+
 const router = express();
 
-router.use('*',function(req,res,next){
-    res.send("TEST");
-});
+router.get('/address', bcCtrl.getAddress);
 
 export default router;

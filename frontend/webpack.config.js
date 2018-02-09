@@ -22,7 +22,7 @@ if(env === 'build'){
 //For using fetch
 plugins.push(new webpack.ProvidePlugin({
     'Promise': 'es6-promise', // (https://gist.github.com/Couto/b29676dd1ab8714a818f#gistcomment-1584602)
-    'fetch': 'imports?this=>global!exports?global.fetch!whatwg-fetch'
+    'fetch': 'imports-loader?this=>global!exports-loader?global.fetch!whatwg-fetch'
 }));
 
 //The default entry point is src/index.js
@@ -31,7 +31,7 @@ var config = {
   entry: ['whatwg-fetch', __dirname + '/src/index.js'],
   devtool: 'source-map',
   plugins: plugins,
-  target: 'node',
+  target: 'web',
   output: {
     path: __dirname + '/build',
     filename: outputFile,

@@ -37,7 +37,7 @@ server.use(bodyParser.urlencoded({extended:false})); //Parse urlencoded bodies
 server.use(bodyParser.json()); //Send JSON response
 
 //Routes
-server.use('/',router);
+server.use('/api/v1',router);
 
 server.listen(port, function(err){
     if(err){
