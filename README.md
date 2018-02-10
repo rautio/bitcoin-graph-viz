@@ -1,4 +1,12 @@
 # bitcoin-graph-viz
-A graph visualization of Bitcoin transactions using Sigma.js.
+A simple graph visualization of Bitcoin transactions using Sigma.js. The data is queried from blockchain.info.
 
-Using Webpack & Babel to transpile the JavaScript to ES5.
+Backend: A Node app that handles the queries and data conversions
+Frontend: A web app using sigma.js for the graph rendering
+
+Tech stack:
+* Webpack
+* Babel
+* ES6
+* Sigma.js
+* Node
