@@ -22,6 +22,15 @@ export default class GraphConverter{
         //     source,
         //     target
         // }
+        function getNode(){
+            return {
+                color: '#0047AB',
+                select_color: '#ff00ff',
+                size:Math.random()*3,
+                x: Math.random()*2,
+                y: Math.random()*2
+            };
+        }
         for(let t in txs){
             if(txs.hasOwnProperty(t)){
                 //Brute force conversion for now
@@ -32,26 +41,20 @@ export default class GraphConverter{
                 nodes.push({
                     id: hash,
                     label: hash,
-                    size:Math.random()*3,
-                    x: Math.random()*2,
-                    y: Math.random()*2
+                    ...getNode()
                 });
                 nodes = nodes.concat(from.map(function(f){
                     return {
                         id:f,
                         label:f,
-                        size:Math.random()*3,
-                        x: Math.random()*2,
-                        y: Math.random()*2
+                        ...getNode()
                     };
                 }));  
                 nodes = nodes.concat(to.map(function(t){
                     return {
                         id:t,
                         label:t,
-                        size:Math.random()*3,
-                        x: Math.random()*2,
-                        y: Math.random()*2
+                        ...getNode()
                     };
                 }));  
                 edges = edges.concat(from.map(function(f){
@@ -59,7 +62,7 @@ export default class GraphConverter{
                         id:f+''+hash,
                         source:f,
                         target:hash,
-                        color:'red',
+                        color: 'red',
                         size:Math.random()*3
                     };
                 }));

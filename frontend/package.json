@@ -11,7 +11,7 @@
     "coveralls": "npm run cover -- --report lcovonly && cat ./coverage/lcov.info | coveralls",
     "lint": "esw src test",
     "lint:watch": "esw -w src test",
-    "clean": "rimraf lib",
+    "clean": "rimraf build",
     "build": "webpack -p --env build",
     "dev": "webpack --progress --colors --watch --env dev",
     "start": "npm-run-all --parallel open dev",
@@ -36,6 +36,7 @@
   },
   "homepage": "https://github.com/rautio/bitcoin-graph-viz#readme",
   "dependencies": {
+    "uglify-js": "^3.3.10",
     "whatwg-fetch": "^2.0.3"
   },
   "devDependencies": {

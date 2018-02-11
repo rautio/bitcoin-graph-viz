@@ -1,9 +1,9 @@
 // Webpack Config
-
 var webpack = require('webpack');
 var BabiliPlugin = require('babili-webpack-plugin');
 var path = require('path');
 var env = require('yargs').argv.env;
+var path = require('path');
 
 //Change this to your library name
 //Also remember to change the 'main' entry point in package.json
@@ -25,11 +25,22 @@ plugins.push(new webpack.ProvidePlugin({
     'fetch': 'imports-loader?this=>global!exports-loader?global.fetch!whatwg-fetch'
 }));
 
+//For loading sigma plugins
+plugins.push(new webpack.ProvidePlugin({
+  sigma: 'sigma'
+}));
+
 //The default entry point is src/index.js
 //The default output is build/btc-graph-viz.min.js or .js
 var config = {
-  entry: ['whatwg-fetch', __dirname + '/src/index.js'],
+  entry: ['whatwg-fetch',path.resolve(__dirname, './src/index.js')],
+  resolve: {
+    alias: {
+      'plugins': path.resolve(__dirname, './lib/plugins.js')
+    }
+  },
   devtool: 'source-map',
+  node: { fs: 'empty' },
   plugins: plugins,
   target: 'web',
   output: {
@@ -40,7 +51,7 @@ var config = {
     umdNamedDefine: true
   },
   module: {
-    loaders: [
+    rules: [
       {
         test: /(\.jsx|\.js)$/,
         loader: 'babel-loader',
@@ -50,6 +61,18 @@ var config = {
         test: /(\.jsx|\.js)$/,
         loader: "eslint-loader",
         exclude: /node_modules/
+      },
+      // {
+      //   test: /sigma.*\.js?$/, // the test to only select sigma files
+      //   exclude: ['src'], // you ony need to check node_modules, so remove your application files
+      //   loaders: ['script'] // loading as script
+      // },
+      {
+        test: /sigma.*\.js?$/,
+        use: [{
+          loader: 'imports-loader',
+          options: "this=>window"
+        }]
       }
     ]
   }

@@ -34,7 +34,7 @@
   "rules":{
     //Plugin: Ensures an imported module can be resolved to a module on the
     //local filesystem, as defined by standard Node require.resolve behavior.
-    "import/no-unresolved":[2, {"ignore":["^[~]"]}],
+    "import/no-unresolved":[2, {"ignore":["sigma."]}],
 
     //enforce the consistent use of either backticks, double, or single quotes
     "quotes": 0,
