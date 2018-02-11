@@ -14,10 +14,19 @@
           <input type="text" placeholder="Search.." id="search-box">
           <button id="search-submit"><i class="fa fa-search"></i></button>
         </div>
+        <span class="search-helper"> Search by address or hash. Example: 1NfRMkhm5vjizzqkp2Qb28N7geRQCa4XqC</span>
       </div>
-      <div id="container"></div>
-      <a href="https://twitter.com/thisisoskari" class="fa fa-twitter fa-2x social-button"></a>
-      <a href="https://github.com/rautio/bitcoin-graph-viz" class="fa fa-github fa-2x social-button"><span id="src">Source</span></a>
+      <div id="container">
+        <div id="graph-container"></div>
+        <div id="selection-box">
+          <h4>Selected:</h4>
+          <span id ="selection-value"></span>
+        </div>
+      </div>
+      <div class="footer">
+        <a href="https://twitter.com/thisisoskari" class="fa fa-twitter fa-2x social-button"></a>
+        <a href="https://github.com/rautio/bitcoin-graph-viz" class="fa fa-github fa-2x social-button"><span id="src">Source</span></a>
+      </div>
     </div>
    </body>
   <script src="build/btc-graph-viz.js"></script>

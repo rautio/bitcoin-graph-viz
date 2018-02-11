@@ -2,16 +2,81 @@ import sigma from 'sigma';
 import axios from 'axios';
 import '../lib/plugins.js';
 let s = new sigma({
-  container: 'container',
+  container: 'graph-container',
   settings:{
     defaultNodeColor: '#0047AB',
     defaultEdgeColor: '#999',
     animationsTime: 1000,
-    labelThreshold: 20
+    labelThreshold: 20,
+    doubleClickEnabled: false
   }
 });
 
+function selectionChange(node){
+  const box = document.getElementById('selection-box');
+  const val = document.getElementById('selection-value');
+  if(node){
+    //print contents
+    val.innerHTML = node.label;
+    box.style.display = "block";
+
+  }
+  else{
+    //Clear
+    val.innerHTML = "";
+    box.style.display = "none";
+    //All nodes back to original color
+    sigma.plugins.animate(
+      s,
+      {
+        color: 'base_color',
+      },
+      {
+        easing: 'cubicInOut',
+        duration: 1, //Because 0 is 'falsey'
+      }
+    );
+  }
+}
+
+s.bind('click',function(e){
+  selectionChange(null);
+});
+s.bind('clickNode',function(e){
+  const node = e.data.node;
+  //Change all nodes back to base color
+  // Then change the selected node to the select color
+  sigma.plugins.animate(
+    s,
+    {
+      color: 'base_color',
+    },
+    {
+      easing: 'cubicInOut',
+      duration: 1, //Because 0 is 'falsey'
+      onComplete: function() {
+        // do stuff here after animation is complete
+        // Start the ForceAtlas2 algorithm:
+        sigma.plugins.animate(
+          s,
+          {color:'select_color'},
+          {
+            easing: 'cubicInOut',
+            duration: 1, //Because 0 is 'falsey'
+            nodes: [node.id],
+            onComplete:function(){
+              selectionChange(node);
+            }
+          }
+        );
+      }
+    }
+  );
+
+});
+
 function createGraph(data){
+  s.graph.clear();
   s.graph.read(data);
   s.startForceAtlas2({worker: true, barnesHutOptimize: false});
   // Configure the noverlap layout:

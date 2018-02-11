@@ -26,6 +26,7 @@ export default class GraphConverter{
             return {
                 color: '#0047AB',
                 select_color: '#ff00ff',
+                base_color: '#0047AB',
                 size:Math.random()*3,
                 x: Math.random()*2,
                 y: Math.random()*2
